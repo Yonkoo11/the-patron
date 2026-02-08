@@ -36,7 +36,7 @@ export default function Header() {
   const { balance, isLoading } = useTreasury();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-white/[0.06]" style={{ background: "rgba(10,10,10,0.7)", backdropFilter: "blur(16px) saturate(180%)", WebkitBackdropFilter: "blur(16px) saturate(180%)" }}>
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
         {/* Left: Logo + Title */}
         <NavLink

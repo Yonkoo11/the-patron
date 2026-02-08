@@ -126,11 +126,7 @@ pre,
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: border-color var(--transition);
-}
-
-.card:hover {
-  border-color: var(--border-hover);
+  transition: border-color var(--transition), transform var(--transition);
 }
 
 .glow-green {
@@ -206,4 +202,216 @@ a {
 
 a:hover {
   color: #33ffaa;
+}
+
+/* ─── Animated Mesh Background Orbs ─── */
+
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -40px) scale(1.05); }
+  50% { transform: translate(-30px, 30px) scale(0.95); }
+  75% { transform: translate(40px, 60px) scale(1.02); }
+}
+
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-50px, 40px) scale(1.08); }
+  66% { transform: translate(30px, -60px) scale(0.92); }
+}
+
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(40px, 50px) scale(1.1); }
+  80% { transform: translate(-60px, -20px) scale(0.9); }
+}
+
+.animate-orb-1 { animation: orb-drift-1 20s ease-in-out infinite; }
+.animate-orb-2 { animation: orb-drift-2 25s ease-in-out infinite; }
+.animate-orb-3 { animation: orb-drift-3 30s ease-in-out infinite; }
+
+/* ─── Scroll Reveal ─── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Glassmorphism Card ─── */
+
+.glass-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Gradient Border Card ─── */
+
+.gradient-border {
+  position: relative;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius) + 1px);
+  background: linear-gradient(135deg, rgba(0,255,136,0.3), rgba(59,130,246,0.2), rgba(245,158,11,0.1));
+  z-index: -1;
+  transition: opacity var(--transition);
+  opacity: 0.5;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ─── Hero Balance Glow ─── */
+
+.balance-glow {
+  text-shadow: 0 0 40px rgba(0, 255, 136, 0.3), 0 0 80px rgba(0, 255, 136, 0.1);
+}
+
+/* ─── Section Divider ─── */
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ─── Stagger Animations ─── */
+
+.stagger-1 {
+  animation: fadeIn 300ms ease-out 50ms forwards;
+  opacity: 0;
+}
+
+.stagger-2 {
+  animation: fadeIn 300ms ease-out 100ms forwards;
+  opacity: 0;
+}
+
+.stagger-3 {
+  animation: fadeIn 300ms ease-out 150ms forwards;
+  opacity: 0;
+}
+
+.stagger-4 {
+  animation: fadeIn 300ms ease-out 200ms forwards;
+  opacity: 0;
+}
+
+.stagger-5 {
+  animation: fadeIn 300ms ease-out 250ms forwards;
+  opacity: 0;
+}
+
+.stagger-6 {
+  animation: fadeIn 300ms ease-out 300ms forwards;
+  opacity: 0;
+}
+
+/* ─── Enhanced Card Hover ─── */
+
+.card:hover {
+  border-color: #333;
+  transform: translateY(-1px);
+}
+
+/* ─── Shimmer Loading ─── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--border) 50%,
+    var(--surface) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── Count Up Animation ─── */
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Gradient Text ─── */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-green), #00ccaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow Variants ─── */
+
+.glow-blue {
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.15),
+    0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.glow-amber {
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15),
+    0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+/* ─── Footer ─── */
+
+footer {
+  background-color: var(--bg);
+  font-family: var(--font-body);
+}
+
+footer a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+footer a:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 640px) {
+  .stat-value {
+    font-size: 1.5rem;
+  }
 }

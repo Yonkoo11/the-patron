@@ -1,107 +1,309 @@
-import { useTreasury } from "../hooks/useTreasury";
 import { truncateAddress } from "../lib/formatters";
 import { BASESCAN_URL, TREASURY_ADDRESS, PATRON_ADDRESS } from "../lib/contract";
 
-export default function AboutPage() {
-  const { patronAddress } = useTreasury();
-
+function ExternalLinkIcon() {
   return (
-    <div className="fade-in mx-auto max-w-2xl space-y-8">
-      <h1 className="font-heading text-2xl font-bold">About The Patron</h1>
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="inline-block ml-1 opacity-50 group-hover:opacity-100 transition-opacity"
+    >
+      <path
+        d="M3.5 1.5H10.5V8.5M10.5 1.5L1.5 10.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-      <section className="space-y-4 text-text-secondary leading-relaxed">
-        <p>
-          The Patron is an autonomous AI agent that manages its own on-chain
-          treasury on Base. It evaluates project proposals, scores them against
-          a set of criteria, and disburses grants directly to builders -- all
-          without human intervention.
-        </p>
-        <p>
-          Every grant decision, every ETH transfer, every round announcement
-          happens transparently on-chain through the PatronTreasury smart
-          contract.
+const PIPELINE_STEPS = [
+  { num: "01", name: "Scan", desc: "Discover builders shipping on Base" },
+  { num: "02", name: "Verify", desc: "Check deployed contracts and activity" },
+  { num: "03", name: "Evaluate", desc: "Score projects across four dimensions" },
+  { num: "04", name: "Decide", desc: "Apply funding threshold to scores" },
+  { num: "05", name: "Fund", desc: "Disburse ETH directly on-chain" },
+  { num: "06", name: "Report", desc: "Log every decision with a reason hash" },
+];
+
+const TECH_STACK = [
+  "Solidity",
+  "Base",
+  "Viem",
+  "React",
+  "TypeScript",
+  "Tailwind",
+];
+
+export default function AboutPage() {
+  return (
+    <div className="fade-in space-y-12 max-w-4xl mx-auto">
+      {/* Hero */}
+      <section className="space-y-5 stagger-1">
+        <h1 className="font-heading text-3xl font-bold tracking-tight">
+          About The Patron
+        </h1>
+        <div className="space-y-4 text-text-secondary text-sm leading-relaxed max-w-2xl">
+          <p>
+            The Patron is an autonomous AI agent that manages its own on-chain
+            treasury on Base. It scans for builders, evaluates their work against
+            a scoring rubric, and disburses ETH grants directly to qualifying
+            projects. No committee, no application form, no human in the loop.
+          </p>
+          <p>
+            Every grant decision, every ETH transfer, every funding round is
+            recorded transparently through the PatronTreasury smart contract.
+            The agent operates on a simple principle: find good builders and fund
+            them fast.
+          </p>
+        </div>
+        <p className="font-mono text-sm text-accent-green tracking-wide">
+          Zero humans. Every decision on-chain.
         </p>
       </section>
 
-      <section className="card p-6 space-y-4">
-        <h2 className="font-heading text-lg font-semibold text-text-primary">
-          How it works
-        </h2>
-        <ol className="list-decimal list-inside space-y-2 text-sm text-text-secondary">
-          <li>
-            The Patron agent starts a new funding round with a theme
-          </li>
-          <li>
-            Builders submit projects or the agent discovers them
-          </li>
-          <li>
-            The agent evaluates each project against its criteria
-          </li>
-          <li>
-            Qualifying projects receive ETH grants directly on-chain
-          </li>
-          <li>
-            All decisions are logged with a reason hash for transparency
-          </li>
-        </ol>
+      {/* How It Works */}
+      <section className="space-y-5 stagger-2">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-7 rounded-full bg-accent-green" />
+          <h2 className="font-heading text-xl font-semibold">How It Works</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {PIPELINE_STEPS.map((step) => (
+            <div key={step.num} className="card p-5 space-y-2">
+              <span className="font-heading text-2xl font-bold text-accent-green">
+                {step.num}
+              </span>
+              <p className="font-semibold text-sm text-text-primary">
+                {step.name}
+              </p>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="card p-6 space-y-3">
-        <h2 className="font-heading text-lg font-semibold text-text-primary">
-          Contract Details
-        </h2>
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center justify-between">
+      {/* Evaluation Criteria */}
+      <section className="space-y-5 stagger-3">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-7 rounded-full bg-accent-blue" />
+          <h2 className="font-heading text-xl font-semibold">
+            Evaluation Criteria
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {/* Novelty */}
+          <div className="card p-5 border-l-2 border-l-accent-green">
+            <div className="flex items-baseline justify-between">
+              <span className="font-semibold text-sm text-text-primary">
+                Novelty
+              </span>
+              <span className="font-heading text-lg font-bold text-accent-green">
+                30%
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
+              Is this something new? Original ideas and unexplored approaches
+              score highest.
+            </p>
+          </div>
+          {/* Activity */}
+          <div className="card p-5 border-l-2 border-l-accent-blue">
+            <div className="flex items-baseline justify-between">
+              <span className="font-semibold text-sm text-text-primary">
+                Activity
+              </span>
+              <span className="font-heading text-lg font-bold text-accent-blue">
+                25%
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
+              Recent commits, deployments, and on-chain interactions signal
+              active building.
+            </p>
+          </div>
+          {/* Quality */}
+          <div className="card p-5 border-l-2 border-l-accent-amber">
+            <div className="flex items-baseline justify-between">
+              <span className="font-semibold text-sm text-text-primary">
+                Quality
+              </span>
+              <span className="font-heading text-lg font-bold text-accent-amber">
+                25%
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
+              Code quality, contract verification, and thoughtful architecture.
+            </p>
+          </div>
+          {/* Impact */}
+          <div className="card p-5 border-l-2 border-l-accent-red">
+            <div className="flex items-baseline justify-between">
+              <span className="font-semibold text-sm text-text-primary">
+                Impact
+              </span>
+              <span className="font-heading text-lg font-bold text-accent-red">
+                20%
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
+              Potential to benefit the Base ecosystem and its users at scale.
+            </p>
+          </div>
+        </div>
+        <p className="text-xs text-text-tertiary pl-1">
+          Minimum score: 60/100 to receive funding.
+        </p>
+      </section>
+
+      {/* Contract Details */}
+      <section className="stagger-4">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-1 h-7 rounded-full bg-accent-amber" />
+          <h2 className="font-heading text-xl font-semibold">
+            Contract Details
+          </h2>
+        </div>
+        <div className="card p-6 space-y-3">
+          <div className="flex items-center justify-between text-sm">
             <span className="text-text-secondary">Network</span>
             <span className="text-text-primary">Base Sepolia</span>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-sm">
             <span className="text-text-secondary">Treasury</span>
             <a
               href={`${BASESCAN_URL}/address/${TREASURY_ADDRESS}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-xs"
+              className="group font-mono text-xs text-text-primary hover:text-accent-green transition-colors"
             >
               {truncateAddress(TREASURY_ADDRESS)}
+              <ExternalLinkIcon />
             </a>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-text-secondary">Patron (Agent)</span>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-text-secondary">Patron Agent</span>
             <a
-              href={`${BASESCAN_URL}/address/${patronAddress ?? PATRON_ADDRESS}`}
+              href={`${BASESCAN_URL}/address/${PATRON_ADDRESS}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-xs"
+              className="group font-mono text-xs text-text-primary hover:text-accent-green transition-colors"
             >
-              {truncateAddress(patronAddress ?? PATRON_ADDRESS)}
+              {truncateAddress(PATRON_ADDRESS)}
+              <ExternalLinkIcon />
             </a>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-text-secondary">Chain ID</span>
+            <span className="font-mono text-xs text-text-primary">84532</span>
           </div>
         </div>
       </section>
 
-      <section className="card p-6 space-y-3">
-        <h2 className="font-heading text-lg font-semibold text-text-primary">
-          Design Principles
-        </h2>
-        <ul className="space-y-2 text-sm text-text-secondary">
-          <li>
-            <span className="text-accent-green font-medium">Autonomous</span> --
-            The agent makes all grant decisions independently
-          </li>
-          <li>
-            <span className="text-accent-blue font-medium">Transparent</span> --
-            Every action is verifiable on-chain
-          </li>
-          <li>
-            <span className="text-accent-amber font-medium">Minimal</span> --
-            Simple contract, clear logic, no admin backdoors
-          </li>
-          <li>
-            <span className="text-accent-red font-medium">Immutable</span> --
-            The patron address is set at deploy and cannot change
-          </li>
-        </ul>
+      {/* Design Principles */}
+      <section className="space-y-5 stagger-5">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-7 rounded-full bg-accent-red" />
+          <h2 className="font-heading text-xl font-semibold">
+            Design Principles
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+          <div className="card p-5 space-y-2">
+            <div className="w-2 h-2 rounded-full bg-accent-green" />
+            <p className="font-semibold text-sm text-text-primary">
+              Autonomous
+            </p>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              All grant decisions made independently by the agent
+            </p>
+          </div>
+          <div className="card p-5 space-y-2">
+            <div className="w-2 h-2 rounded-full bg-accent-blue" />
+            <p className="font-semibold text-sm text-text-primary">
+              Transparent
+            </p>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Every action verifiable on-chain, no hidden logic
+            </p>
+          </div>
+          <div className="card p-5 space-y-2">
+            <div className="w-2 h-2 rounded-full bg-accent-amber" />
+            <p className="font-semibold text-sm text-text-primary">Minimal</p>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Simple contract, clear rules, no admin backdoors
+            </p>
+          </div>
+          <div className="card p-5 space-y-2">
+            <div className="w-2 h-2 rounded-full bg-accent-red" />
+            <p className="font-semibold text-sm text-text-primary">
+              Immutable
+            </p>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Patron address set at deploy, cannot be changed
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="space-y-4 stagger-6">
+        <h3 className="text-xs uppercase tracking-wider text-text-tertiary">
+          Built with
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {TECH_STACK.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-md border border-border px-3 py-1 font-mono text-xs text-text-tertiary"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Links */}
+      <section className="space-y-4">
+        <h3 className="text-xs uppercase tracking-wider text-text-tertiary">
+          Links
+        </h3>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <a
+            href={`${BASESCAN_URL}/address/${TREASURY_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group card flex items-center justify-between p-4 text-sm text-text-secondary hover:border-accent-green hover:text-accent-green transition-all"
+          >
+            <span>Treasury Contract</span>
+            <ExternalLinkIcon />
+          </a>
+          <a
+            href="https://github.com/Yonkoo11/the-patron"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group card flex items-center justify-between p-4 text-sm text-text-secondary hover:border-accent-green hover:text-accent-green transition-all"
+          >
+            <span>GitHub</span>
+            <ExternalLinkIcon />
+          </a>
+          <a
+            href={`${BASESCAN_URL}/address/${PATRON_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group card flex items-center justify-between p-4 text-sm text-text-secondary hover:border-accent-green hover:text-accent-green transition-all"
+          >
+            <span>Agent Wallet</span>
+            <ExternalLinkIcon />
+          </a>
+        </div>
       </section>
     </div>
   );
