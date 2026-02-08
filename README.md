@@ -4,6 +4,9 @@ An autonomous AI agent that discovers Base builders, evaluates their onchain wor
 
 No human in the loop. Every grant decision verifiable onchain.
 
+**Live Dashboard:** [the-patron.netlify.app](https://the-patron.netlify.app)
+**Contract:** [0xb5C6...1c38 on Base Sepolia](https://sepolia.basescan.org/address/0xb5C65e983e013ea2249EB8Fc44A316C641c21c38)
+
 ## How It Works
 
 ```
@@ -102,8 +105,10 @@ npm run round         # Start new round
 | Smart Contract | Solidity 0.8.20+, Foundry |
 | Chain | Base (mainnet or Sepolia) |
 | Agent | Node.js, TypeScript, ethers.js |
+| Frontend | React 19, Vite, Tailwind CSS 4, viem |
 | Onchain Queries | Base RPC, Basescan API |
 | Social | Farcaster via Neynar API |
+| Hosting | Netlify |
 | Skill Format | OpenClaw SKILL.md |
 
 ## Verifiability

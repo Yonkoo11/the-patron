@@ -182,14 +182,21 @@ export default function GrantsPage() {
                 </span>
               </div>
 
-              {/* Footer row: reason hash + tx link */}
+              {/* Footer row: verification hash + tx link */}
               <div className="mt-3 flex items-center justify-between gap-4 text-xs">
-                <div className="flex items-center gap-1.5 text-text-tertiary min-w-0">
-                  <span className="shrink-0">Reason:</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText(grant.reasonHash)}
+                  className="flex items-center gap-1.5 text-text-tertiary hover:text-text-secondary transition-colors cursor-pointer group/hash"
+                  title="Copy full verification hash"
+                >
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="shrink-0 opacity-50 group-hover/hash:opacity-100 transition-opacity">
+                    <path d="M2 3.5V1.5C2 1.22 2.22 1 2.5 1H8.5C8.78 1 9 1.22 9 1.5V6.5C9 6.78 8.78 7 8.5 7H6.5M1.5 3H6.5C6.78 3 7 3.22 7 3.5V8.5C7 8.78 6.78 9 6.5 9H1.5C1.22 9 1 8.78 1 8.5V3.5C1 3.22 1.22 3 1.5 3Z" stroke="currentColor" strokeWidth="0.8"/>
+                  </svg>
+                  <span className="shrink-0">Verification hash</span>
                   <code className="font-mono text-text-secondary truncate">
                     {grant.reasonHash.slice(0, 18)}...
                   </code>
-                </div>
+                </button>
                 <a
                   href={`${BASESCAN_URL}/address/${grant.recipient}`}
                   target="_blank"
