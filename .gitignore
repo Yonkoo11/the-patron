@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+agent/node_modules/
+
+# Build
+agent/dist/
+
+# Environment
+.env
+agent/.env
+
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
+# OS
+.DS_Store

@@ -1,0 +1,26 @@
+{
+  "name": "the-patron-agent",
+  "version": "1.0.0",
+  "description": "Autonomous AI agent that discovers Base builders and sends them ETH micro-grants",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "scan": "tsx src/cli.ts scan",
+    "evaluate": "tsx src/cli.ts evaluate",
+    "disburse": "tsx src/cli.ts disburse",
+    "status": "tsx src/cli.ts status",
+    "round": "tsx src/cli.ts round"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
