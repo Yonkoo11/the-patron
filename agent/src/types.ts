@@ -4,6 +4,8 @@ export interface BuilderCandidate {
   socialHandle?: string;
   socialPost?: string;
   discoveredAt: number;
+  /** Contract addresses found during block scanning (pre-verified) */
+  knownContracts?: string[];
 }
 
 export interface OnchainProfile {

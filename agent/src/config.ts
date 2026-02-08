@@ -28,12 +28,12 @@ export const config = {
 
   // Grant parameters
   grant: {
-    minScore: 60,
+    minScore: Number(process.env.MIN_SCORE || "60"),
     maxPerRound: 3,
-    minAmount: 0.001,  // ETH
-    maxAmount: 0.005,  // ETH
+    minAmount: 0.0005, // ETH
+    maxAmount: 0.002,  // ETH (conservative for testnet)
     minTxCount: 5,
-    minBytecodeSize: 500,
+    minBytecodeSize: 200,
   },
 
   // Scoring weights

@@ -11,7 +11,7 @@ export async function verifyBuilder(candidate: BuilderCandidate): Promise<Onchai
 
   const [txCount, contractsDeployed] = await Promise.all([
     getTransactionCount(candidate.address),
-    getDeployedContracts(candidate.address),
+    getDeployedContracts(candidate.address, candidate.knownContracts),
   ]);
 
   // Check recent activity (any tx in last 7 days)
