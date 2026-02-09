@@ -4,27 +4,13 @@ import { useTreasury } from "../hooks/useTreasury";
 
 function DiamondIcon() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 2L22 12L12 22L2 12L12 2Z"
-        fill="#00ff88"
-        fillOpacity="0.15"
-        stroke="#00ff88"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 6L18 12L12 18L6 12L12 6Z"
-        fill="#00ff88"
-        fillOpacity="0.3"
-      />
-    </svg>
+    <img
+      src="/logo.png"
+      alt="The Patron"
+      width={28}
+      height={28}
+      style={{ borderRadius: 4 }}
+    />
   );
 }
 
