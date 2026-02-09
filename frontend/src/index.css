@@ -126,7 +126,7 @@ pre,
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: border-color var(--transition), transform var(--transition);
+  transition: border-color 150ms ease-out, transform 150ms ease-out, box-shadow 150ms ease-out;
 }
 
 .glow-green {
@@ -207,40 +207,45 @@ a:hover {
 /* ─── Animated Mesh Background Orbs ─── */
 
 @keyframes orb-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(60px, -40px) scale(1.05); }
-  50% { transform: translate(-30px, 30px) scale(0.95); }
-  75% { transform: translate(40px, 60px) scale(1.02); }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  25% { transform: translate(60px, -40px) scale(1.05); opacity: 0.8; }
+  50% { transform: translate(-30px, 30px) scale(0.95); opacity: 0.5; }
+  75% { transform: translate(40px, 60px) scale(1.02); opacity: 0.75; }
 }
 
 @keyframes orb-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-50px, 40px) scale(1.08); }
-  66% { transform: translate(30px, -60px) scale(0.92); }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  33% { transform: translate(-50px, 40px) scale(1.08); opacity: 0.75; }
+  66% { transform: translate(30px, -60px) scale(0.92); opacity: 0.4; }
 }
 
 @keyframes orb-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40% { transform: translate(40px, 50px) scale(1.1); }
-  80% { transform: translate(-60px, -20px) scale(0.9); }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+  40% { transform: translate(40px, 50px) scale(1.1); opacity: 0.8; }
+  80% { transform: translate(-60px, -20px) scale(0.9); opacity: 0.45; }
 }
 
 .animate-orb-1 { animation: orb-drift-1 20s ease-in-out infinite; }
 .animate-orb-2 { animation: orb-drift-2 25s ease-in-out infinite; }
 .animate-orb-3 { animation: orb-drift-3 30s ease-in-out infinite; }
 
-/* ─── Scroll Reveal ─── */
+/* ─── Scroll Reveal with Stagger Support ─── */
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0);
 }
+
+[data-reveal="delay-1"] { transition-delay: 100ms; }
+[data-reveal="delay-2"] { transition-delay: 200ms; }
+[data-reveal="delay-3"] { transition-delay: 300ms; }
+[data-reveal="delay-4"] { transition-delay: 400ms; }
 
 /* ─── Glassmorphism Card ─── */
 
@@ -333,6 +338,7 @@ a:hover {
 .card:hover {
   border-color: #333;
   transform: translateY(-1px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.03);
 }
 
 /* ─── Shimmer Loading ─── */
@@ -368,6 +374,23 @@ a:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.count-up {
+  animation: count-up 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ─── Gradient Text ─── */
@@ -408,10 +431,367 @@ footer a:hover {
   color: var(--text-primary);
 }
 
+/* ─── Animated Gradient Border ─── */
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Floating Particles Effect ─── */
+
+.particles {
+  position: relative;
+}
+
+.particles::before,
+.particles::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(0,255,136,0.3);
+  border-radius: 50%;
+  animation: float-particle 15s linear infinite;
+  pointer-events: none;
+}
+
+.particles::after {
+  width: 1px;
+  height: 1px;
+  animation-delay: -7s;
+  animation-duration: 20s;
+}
+
+@keyframes float-particle {
+  0% { transform: translate(0, 100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate(100px, -100vh) scale(1); opacity: 0; }
+}
+
+/* ─── Animated Nav Underline ─── */
+
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--accent-green);
+  border-radius: 1px;
+  animation: nav-underline 200ms ease-out;
+}
+
+@keyframes nav-underline {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ─── Horizontal Scan Line ─── */
+
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+  animation: line-scan 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes line-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ─── Mobile Menu Animation ─── */
+
+@keyframes menu-open {
+  from { opacity: 0; backdrop-filter: blur(0); }
+  to { opacity: 1; backdrop-filter: blur(20px); }
+}
+
+.mobile-menu-enter {
+  animation: menu-open 200ms ease-out forwards;
+}
+
+/* ─── Individual Floating Particle ─── */
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(0, 255, 136, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 4px rgba(0, 255, 136, 0.15);
+}
+
+/* ─── Count Reveal ─── */
+
+.count-reveal {
+  animation: count-up 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Pipeline Progress Line ─── */
+
+@keyframes pipeline-fill {
+  from { width: 0%; }
+  to { width: var(--fill-pct, 66%); }
+}
+
+.pipeline-line-fill {
+  animation: pipeline-fill 1.5s ease-out 400ms forwards;
+  width: 0%;
+}
+
+/* ─── Pipeline Step Stagger ─── */
+
+.step-reveal {
+  opacity: 0;
+  animation: count-up 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Pulsing Ring ─── */
+
+@keyframes ring-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 0.25;
+  }
+}
+
 /* ─── Responsive ─── */
 
 @media (max-width: 640px) {
   .stat-value {
     font-size: 1.5rem;
   }
+
+  h1 {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Enhanced Animations & Effects
+   ═══════════════════════════════════════════════ */
+
+/* ─── Mobile Menu: Smooth Enter/Exit ─── */
+
+@keyframes mobileMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileMenuOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.mobile-menu-enter {
+  animation: mobileMenuIn 300ms ease-out forwards;
+}
+
+.mobile-menu-exit {
+  animation: mobileMenuOut 250ms ease-in forwards;
+}
+
+@keyframes mobileNavSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-nav-item {
+  opacity: 0;
+  animation: mobileNavSlideIn 300ms ease-out forwards;
+}
+
+/* ─── Hamburger Animated Lines (3-line to X) ─── */
+
+.hamburger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  gap: 5px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 250ms ease, opacity 200ms ease;
+  transform-origin: center;
+}
+
+.hamburger-open-top {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger-open-mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-open-bot {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ─── Animated Gradient Border Rotation ─── */
+
+@keyframes gradient-rotate {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+/* ─── Enhanced Card Hover Glow ─── */
+
+.card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 1px rgba(0,255,136,0.1);
+}
+
+/* ─── Enhanced Animated Nav Underline ─── */
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-radius: 1px;
+  background: #00ff88;
+  animation: navUnderline 200ms ease-out forwards;
+}
+
+@keyframes navUnderline {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ─── Floating Particles (enhanced) ─── */
+
+@keyframes float-particle-enhanced {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  50% { transform: translateY(-200px) translateX(30px); }
+}
+
+@keyframes particle-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-18px) translateX(8px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) translateX(-6px);
+    opacity: 0.25;
+  }
+  75% {
+    transform: translateY(-22px) translateX(10px);
+    opacity: 0.5;
+  }
+}
+
+.particle {
+  position: absolute;
+  background: rgba(0,255,136,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 4px rgba(0, 255, 136, 0.15);
+  animation: particle-float var(--duration, 6s) ease-in-out var(--delay, 0s) infinite;
+}
+
+/* ─── Count Reveal with Blur ─── */
+
+@keyframes countReveal {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.count-reveal {
+  animation: countReveal 500ms ease-out forwards;
+}
+
+/* ─── Horizontal Scroll Fade Indicator ─── */
+
+.scroll-fade-right {
+  position: relative;
+}
+
+.scroll-fade-right::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--bg));
+  pointer-events: none;
+}
+
+/* ─── Enhanced Glass Card Hover ─── */
+
+.glass-card:hover {
+  border-color: rgba(0,255,136,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,255,136,0.05);
+}
+
+/* ─── Text Shimmer Effect ─── */
+
+@keyframes text-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 0%, #00ff88 50%, #f0f0f0 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4s linear infinite;
 }

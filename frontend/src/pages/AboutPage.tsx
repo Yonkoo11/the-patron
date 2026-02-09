@@ -42,11 +42,11 @@ const TECH_STACK = [
 
 export default function AboutPage() {
   return (
-    <div className="fade-in space-y-12 max-w-4xl mx-auto">
+    <div className="fade-in space-y-16 max-w-4xl mx-auto">
       {/* Hero */}
-      <section className="space-y-5 stagger-1">
-        <h1 className="font-heading text-3xl font-bold tracking-tight">
-          About The Patron
+      <section className="space-y-5 stagger-1 pt-4">
+        <h1 className="font-heading text-4xl font-bold tracking-tight">
+          About <span className="gradient-text">The Patron</span>
         </h1>
         <div className="space-y-4 text-text-secondary text-sm leading-relaxed max-w-2xl">
           <p>
@@ -67,8 +67,10 @@ export default function AboutPage() {
         </p>
       </section>
 
+      <div className="section-divider" />
+
       {/* How It Works */}
-      <section className="space-y-5 stagger-2">
+      <section className="space-y-5" data-reveal>
         <div className="flex items-center gap-3">
           <div className="w-1 h-7 rounded-full bg-accent-green" />
           <h2 className="font-heading text-xl font-semibold">How It Works</h2>
@@ -90,8 +92,10 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* Evaluation Criteria */}
-      <section className="space-y-5 stagger-3">
+      <section className="space-y-5" data-reveal>
         <div className="flex items-center gap-3">
           <div className="w-1 h-7 rounded-full bg-accent-blue" />
           <h2 className="font-heading text-xl font-semibold">
@@ -99,72 +103,42 @@ export default function AboutPage() {
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {/* Novelty */}
-          <div className="card p-5 border-l-2 border-l-accent-green">
-            <div className="flex items-baseline justify-between">
-              <span className="font-semibold text-sm text-text-primary">
-                Novelty
-              </span>
-              <span className="font-heading text-lg font-bold text-accent-green">
-                30%
-              </span>
+          {[
+            { name: "Novelty", weight: 30, borderClass: "border-l-accent-green", textClass: "text-accent-green", barClass: "bg-accent-green", desc: "Is this something new? Original ideas and unexplored approaches score highest." },
+            { name: "Activity", weight: 25, borderClass: "border-l-accent-blue", textClass: "text-accent-blue", barClass: "bg-accent-blue", desc: "Recent commits, deployments, and on-chain interactions signal active building." },
+            { name: "Quality", weight: 25, borderClass: "border-l-accent-amber", textClass: "text-accent-amber", barClass: "bg-accent-amber", desc: "Code quality, contract verification, and thoughtful architecture." },
+            { name: "Impact", weight: 20, borderClass: "border-l-accent-red", textClass: "text-accent-red", barClass: "bg-accent-red", desc: "Potential to benefit the Base ecosystem and its users at scale." },
+          ].map((dim) => (
+            <div key={dim.name} className={`card p-5 border-l-2 ${dim.borderClass}`}>
+              <div className="flex items-baseline justify-between">
+                <span className="font-semibold text-sm text-text-primary">
+                  {dim.name}
+                </span>
+                <span className={`font-heading text-lg font-bold ${dim.textClass}`}>
+                  {dim.weight}%
+                </span>
+              </div>
+              <div className="mt-3 h-1 rounded-full bg-border overflow-hidden">
+                <div
+                  className={`h-full rounded-full ${dim.barClass}`}
+                  style={{ width: `${(dim.weight / 30) * 100}%`, transition: "width 1s ease-out" }}
+                />
+              </div>
+              <p className="mt-3 text-xs text-text-secondary leading-relaxed">
+                {dim.desc}
+              </p>
             </div>
-            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
-              Is this something new? Original ideas and unexplored approaches
-              score highest.
-            </p>
-          </div>
-          {/* Activity */}
-          <div className="card p-5 border-l-2 border-l-accent-blue">
-            <div className="flex items-baseline justify-between">
-              <span className="font-semibold text-sm text-text-primary">
-                Activity
-              </span>
-              <span className="font-heading text-lg font-bold text-accent-blue">
-                25%
-              </span>
-            </div>
-            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
-              Recent commits, deployments, and on-chain interactions signal
-              active building.
-            </p>
-          </div>
-          {/* Quality */}
-          <div className="card p-5 border-l-2 border-l-accent-amber">
-            <div className="flex items-baseline justify-between">
-              <span className="font-semibold text-sm text-text-primary">
-                Quality
-              </span>
-              <span className="font-heading text-lg font-bold text-accent-amber">
-                25%
-              </span>
-            </div>
-            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
-              Code quality, contract verification, and thoughtful architecture.
-            </p>
-          </div>
-          {/* Impact */}
-          <div className="card p-5 border-l-2 border-l-accent-red">
-            <div className="flex items-baseline justify-between">
-              <span className="font-semibold text-sm text-text-primary">
-                Impact
-              </span>
-              <span className="font-heading text-lg font-bold text-accent-red">
-                20%
-              </span>
-            </div>
-            <p className="mt-2 text-xs text-text-secondary leading-relaxed">
-              Potential to benefit the Base ecosystem and its users at scale.
-            </p>
-          </div>
+          ))}
         </div>
         <p className="text-xs text-text-tertiary pl-1">
           Minimum score: 60/100 to receive funding.
         </p>
       </section>
 
+      <div className="section-divider" />
+
       {/* Contract Details */}
-      <section className="stagger-4">
+      <section data-reveal>
         <div className="flex items-center gap-3 mb-5">
           <div className="w-1 h-7 rounded-full bg-accent-amber" />
           <h2 className="font-heading text-xl font-semibold">
@@ -207,8 +181,10 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* Design Principles */}
-      <section className="space-y-5 stagger-5">
+      <section className="space-y-5" data-reveal>
         <div className="flex items-center gap-3">
           <div className="w-1 h-7 rounded-full bg-accent-red" />
           <h2 className="font-heading text-xl font-semibold">
@@ -254,7 +230,7 @@ export default function AboutPage() {
       </section>
 
       {/* Tech Stack */}
-      <section className="space-y-4 stagger-6">
+      <section className="space-y-4" data-reveal>
         <h3 className="text-xs uppercase tracking-wider text-text-tertiary">
           Built with
         </h3>
@@ -270,8 +246,10 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="section-divider" />
+
       {/* Links */}
-      <section className="space-y-4">
+      <section className="space-y-4" data-reveal>
         <h3 className="text-xs uppercase tracking-wider text-text-tertiary">
           Links
         </h3>

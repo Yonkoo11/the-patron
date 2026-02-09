@@ -54,6 +54,34 @@ function MeshBackground() {
           backgroundSize: "24px 24px",
         }}
       />
+      {/* Floating particles */}
+      {[
+        { left: "10%", duration: 18, delay: 0 },
+        { left: "25%", duration: 24, delay: 3 },
+        { left: "40%", duration: 15, delay: 7 },
+        { left: "55%", duration: 30, delay: 2 },
+        { left: "65%", duration: 22, delay: 5 },
+        { left: "75%", duration: 35, delay: 1 },
+        { left: "85%", duration: 20, delay: 9 },
+        { left: "92%", duration: 28, delay: 6 },
+      ].map((p, i) => (
+        <div
+          key={i}
+          className="particle"
+          style={{
+            left: p.left,
+            animation: `float-particle ${p.duration}s ease-in-out infinite ${p.delay}s`,
+          }}
+        />
+      ))}
+      {/* Subtle horizontal scanline effect */}
+      <div className="absolute inset-0 opacity-[0.015]" style={{
+        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)",
+      }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{
+        background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%)",
+      }} />
     </div>
   );
 }

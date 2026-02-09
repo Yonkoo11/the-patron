@@ -57,7 +57,7 @@ export default function GrantsPage() {
       <div className="space-y-4">
         <div>
           <h1 className="font-heading text-3xl font-bold tracking-tight">
-            Grant Explorer
+            Grant <span className="gradient-text">Explorer</span>
           </h1>
           <p className="mt-2 text-text-secondary text-sm leading-relaxed max-w-xl">
             Every grant disbursed by The Patron, recorded on-chain.
