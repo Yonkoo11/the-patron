@@ -16,3 +16,6 @@ contracts/broadcast/
 
 # OS
 .DS_Store
+video/out/
+frontend/.netlify/
+frontend/tsconfig.tsbuildinfo
