@@ -15,7 +15,7 @@ export const Video: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: "#0a0a0a" }}>
       <FontLoader />
       <MeshBackground />
-      <Audio src={staticFile("audio/ambient-track.mp3")} volume={0.3} />
+      <Audio src={staticFile("audio/ambient-track.mp3")} volume={0.7} />
 
       <Sequence from={0} durationInFrames={179}>
         <TitleScene />
