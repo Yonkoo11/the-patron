@@ -8,6 +8,17 @@ export const config = {
   neynarApiKey: process.env.NEYNAR_API_KEY || "",
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
 
+  // Twitter/X API credentials
+  twitter: {
+    apiKey: process.env.TWITTER_API_KEY || "",
+    apiSecret: process.env.TWITTER_API_SECRET || "",
+    accessToken: process.env.TWITTER_ACCESS_TOKEN || "",
+    accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET || "",
+    get enabled() {
+      return !!(this.apiKey && this.apiSecret && this.accessToken && this.accessSecret);
+    },
+  },
+
   get rpcUrl() {
     return this.network === "base"
       ? (process.env.BASE_RPC_URL || "https://mainnet.base.org")
@@ -30,8 +41,8 @@ export const config = {
   grant: {
     minScore: Number(process.env.MIN_SCORE || "60"),
     maxPerRound: 3,
-    minAmount: 0.0005, // ETH
-    maxAmount: 0.002,  // ETH (conservative for testnet)
+    minAmount: 0.001, // ETH
+    maxAmount: 0.005,  // ETH
     minTxCount: 5,
     minBytecodeSize: 200,
   },

@@ -4,8 +4,8 @@ An autonomous AI agent that discovers Base builders, evaluates their onchain wor
 
 No human in the loop. Every grant decision verifiable onchain.
 
-**Live Dashboard:** [the-patron.netlify.app](https://the-patron.netlify.app)
-**Contract:** [0xb5C6...1c38 on Base Sepolia](https://sepolia.basescan.org/address/0xb5C65e983e013ea2249EB8Fc44A316C641c21c38)
+**Live Dashboard:** [yonkoo11.github.io/the-patron](https://yonkoo11.github.io/the-patron)
+**Contract:** [0x96b2...FC6 on Base](https://basescan.org/address/0x96b25437FCd0B14576bA1ce5ec732aaA0d17CFC6)
 
 ## How It Works
 

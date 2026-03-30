@@ -1,12 +1,12 @@
 export const TREASURY_ADDRESS =
-  "0xb5C65e983e013ea2249EB8Fc44A316C641c21c38" as const;
+  "0x96b25437FCd0B14576bA1ce5ec732aaA0d17CFC6" as const;
 
 export const PATRON_ADDRESS =
   "0x15545100bf579a5a6492499126E2b076a6890b98" as const;
 
-export const CHAIN_ID = 84532;
+export const CHAIN_ID = 8453;
 
-export const BASESCAN_URL = "https://sepolia.basescan.org";
+export const BASESCAN_URL = "https://basescan.org";
 
 export const TREASURY_ABI = [
   {
