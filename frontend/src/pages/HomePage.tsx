@@ -48,31 +48,9 @@ const PARTICLES = [
   { size: 2, top: "75%", left: "5%", delay: "2s", duration: "6s" },
   { size: 3, top: "40%", left: "15%", delay: "1.5s", duration: "7.5s" },
   { size: 2, top: "30%", left: "78%", delay: "0.3s", duration: "6.5s" },
-  { size: 3, top: "85%", left: "50%", delay: "2.5s", duration: "5s" },
-  { size: 2, top: "10%", left: "55%", delay: "1.8s", duration: "9s" },
 ];
 
 /* ─── Icon Components ─── */
-
-function ArrowIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      className="text-text-tertiary"
-    >
-      <path
-        d="M7 4l6 6-6 6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function ExternalIcon({ size = 12 }: { size?: number }) {
   return (
@@ -93,7 +71,7 @@ function ExternalIcon({ size = 12 }: { size?: number }) {
 
 function VaultIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }} className="text-accent-green">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-green" style={{ opacity: 0.5 }}>
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <circle cx="12" cy="12" r="3" />
       <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
@@ -103,7 +81,7 @@ function VaultIcon() {
 
 function GiftIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }} className="text-accent-blue">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-blue" style={{ opacity: 0.5 }}>
       <polyline points="20 12 20 22 4 22 4 12" />
       <rect x="2" y="7" width="20" height="5" />
       <line x1="12" y1="22" x2="12" y2="7" />
@@ -115,7 +93,7 @@ function GiftIcon() {
 
 function ArrowUpRightIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }} className="text-accent-amber">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent-amber" style={{ opacity: 0.5 }}>
       <line x1="7" y1="17" x2="17" y2="7" />
       <polyline points="7 7 17 7 17 17" />
     </svg>
@@ -124,7 +102,7 @@ function ArrowUpRightIcon() {
 
 function LayersIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }} className="text-text-primary">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-secondary" style={{ opacity: 0.5 }}>
       <polygon points="12 2 2 7 12 12 22 7 12 2" />
       <polyline points="2 17 12 22 22 17" />
       <polyline points="2 12 12 17 22 12" />
@@ -148,15 +126,15 @@ export default function HomePage() {
   const animatedRound = useCountUp(currentRound, 800, 0);
 
   return (
-    <div className="fade-in space-y-20">
-      {/* ─── Hero Section ─── */}
-      <section className="relative py-16 text-center">
-        {/* Radial glow behind hero */}
+    <div className="fade-in space-y-12">
+      {/* ─── Hero Section (compact) ─── */}
+      <section className="relative py-10 text-center">
+        {/* Radial glow behind hero -- subtle */}
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(0,255,136,0.06) 0%, rgba(0,255,136,0.02) 40%, transparent 70%)",
+              "radial-gradient(ellipse at center, rgba(0,255,136,0.04) 0%, rgba(0,255,136,0.01) 40%, transparent 70%)",
           }}
         />
 
@@ -177,110 +155,95 @@ export default function HomePage() {
         ))}
 
         {/* Badge */}
-        <div className="stagger-1 mb-8 flex items-center justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-accent-green">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-green opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-green" />
+        <div className="stagger-1 mb-5 flex items-center justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent-green/15 bg-accent-green/5 px-3.5 py-1 text-[10px] font-medium uppercase tracking-widest text-accent-green/80">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-green opacity-50" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-green" />
             </span>
-            Live on Base Sepolia
+            Live on Base
           </span>
         </div>
 
         {/* Title */}
-        <h1 className="stagger-2 font-heading text-5xl font-bold tracking-tight sm:text-6xl">
+        <h1 className="stagger-2 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
           <span className="gradient-text">THE PATRON</span>
         </h1>
 
-        <p className="stagger-3 mx-auto mt-4 max-w-md text-lg text-text-secondary">
+        <p className="stagger-3 mx-auto mt-3 max-w-sm text-sm text-text-secondary">
           Autonomous AI Grant Agent on Base
         </p>
+      </section>
 
-        {/* Treasury balance with pulsing ring */}
-        <div className="stagger-4 relative mt-10">
-          {/* Pulsing ring */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] rounded-full border border-accent-green/10"
-            style={{ animation: "ring-pulse 3s ease-in-out infinite" }}
-          />
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[220px] w-[220px] rounded-full border border-accent-green/5"
-            style={{ animation: "ring-pulse 3s ease-in-out infinite 0.5s" }}
-          />
-
-          <p className="stat-label mb-2">Treasury Balance</p>
-          <p
-            className="font-mono text-6xl font-bold tabular-nums text-accent-green sm:text-7xl"
-            style={{
-              textShadow:
-                "0 0 30px rgba(0,255,136,0.3), 0 0 60px rgba(0,255,136,0.1)",
-            }}
-          >
+      {/* ─── Stats Row ─── */}
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {/* Treasury */}
+        <div className="card stagger-1 border-l-2 border-l-accent-green/60 p-5">
+          <div className="flex items-center justify-between">
+            <p className="stat-label">Treasury</p>
+            <VaultIcon />
+          </div>
+          <p className="stat-value count-reveal mt-3 text-text-primary">
             {isLoading ? (
-              <span className="inline-block h-16 w-48 rounded shimmer" />
+              <span className="inline-block h-8 w-28 rounded shimmer" />
             ) : (
               <>
                 {animatedBalance}
-                <span className="ml-3 text-2xl font-normal text-text-secondary sm:text-3xl">
+                <span className="ml-1.5 text-sm font-normal text-text-tertiary">
                   ETH
                 </span>
               </>
             )}
           </p>
         </div>
-      </section>
-
-      <div className="section-divider" />
-
-      {/* ─── Stats Row ─── */}
-      <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {/* Treasury */}
-        <div className="card stagger-1 border-l-2 border-l-accent-green p-5">
-          <div className="flex items-center justify-between">
-            <p className="stat-label">Treasury</p>
-            <VaultIcon />
-          </div>
-          <p className="stat-value count-reveal mt-2 text-text-primary">
-            {isLoading ? "..." : animatedBalance}
-            <span className="ml-1.5 text-base font-normal text-text-secondary">
-              ETH
-            </span>
-          </p>
-        </div>
 
         {/* Grants */}
-        <div className="card stagger-2 border-l-2 border-l-accent-blue p-5">
+        <div className="card stagger-2 border-l-2 border-l-accent-blue/60 p-5">
           <div className="flex items-center justify-between">
             <p className="stat-label">Grants Issued</p>
             <GiftIcon />
           </div>
-          <p className="stat-value count-reveal mt-2 text-text-primary">
-            {isLoading ? "..." : animatedGrantCount}
+          <p className="stat-value count-reveal mt-3 text-text-primary">
+            {isLoading ? (
+              <span className="inline-block h-8 w-12 rounded shimmer" />
+            ) : (
+              animatedGrantCount
+            )}
           </p>
         </div>
 
         {/* Disbursed */}
-        <div className="card stagger-3 border-l-2 border-l-accent-amber p-5">
+        <div className="card stagger-3 border-l-2 border-l-accent-amber/60 p-5">
           <div className="flex items-center justify-between">
             <p className="stat-label">Total Disbursed</p>
             <ArrowUpRightIcon />
           </div>
-          <p className="stat-value count-reveal mt-2 text-text-primary">
-            {isLoading ? "..." : animatedDisbursed}
-            <span className="ml-1.5 text-base font-normal text-text-secondary">
-              ETH
-            </span>
+          <p className="stat-value count-reveal mt-3 text-text-primary">
+            {isLoading ? (
+              <span className="inline-block h-8 w-28 rounded shimmer" />
+            ) : (
+              <>
+                {animatedDisbursed}
+                <span className="ml-1.5 text-sm font-normal text-text-tertiary">
+                  ETH
+                </span>
+              </>
+            )}
           </p>
         </div>
 
         {/* Round */}
-        <div className="card stagger-4 border-l-2 border-l-text-primary p-5">
+        <div className="card stagger-4 border-l-2 border-l-white/20 p-5">
           <div className="flex items-center justify-between">
             <p className="stat-label">Current Round</p>
             <LayersIcon />
           </div>
-          <p className="stat-value count-reveal mt-2 text-text-primary">
-            {isLoading ? "..." : animatedRound}
+          <p className="stat-value count-reveal mt-3 text-text-primary">
+            {isLoading ? (
+              <span className="inline-block h-8 w-12 rounded shimmer" />
+            ) : (
+              animatedRound
+            )}
           </p>
         </div>
       </section>
@@ -289,58 +252,41 @@ export default function HomePage() {
 
       {/* ─── Pipeline Visualization ─── */}
       <section className="stagger-5">
-        <h2 className="font-heading mb-6 text-center text-sm font-medium uppercase tracking-widest text-text-tertiary">
+        <h2 className="font-heading mb-6 text-center text-[11px] font-medium uppercase tracking-[0.15em] text-text-tertiary">
           Grant Pipeline
         </h2>
 
-        {/* Desktop: single row with progress line */}
+        {/* Desktop: single row, all steps equal */}
         <div className="relative hidden md:block">
           {/* Background track line */}
-          <div className="absolute left-[8%] right-[8%] top-[22px] h-[2px] bg-border" />
-          {/* Animated fill line */}
+          <div className="absolute left-[8%] right-[8%] top-[22px] h-px bg-border" />
+          {/* Animated fill line -- spans full width now */}
           <div
-            className="pipeline-line-fill absolute left-[8%] top-[22px] h-[2px] bg-accent-green/40"
-            style={{ "--fill-pct": "66%" } as React.CSSProperties}
+            className="pipeline-line-fill absolute left-[8%] right-[8%] top-[22px] h-px bg-accent-green/20"
           />
 
-          <div className="relative flex items-center justify-center gap-2">
+          <div className="relative flex items-start justify-between px-[4%]">
             {PIPELINE_STEPS.map((step, i) => (
-              <div key={step.num} className="flex items-center gap-2">
-                <div
-                  className="step-reveal flex flex-col items-center gap-2"
-                  style={{ animationDelay: `${200 + i * 120}ms` }}
-                >
-                  <div
-                    className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-mono font-semibold transition-colors ${
-                      i < 4
-                        ? "border-accent-green/40 bg-accent-green/10 text-accent-green"
-                        : "border-border text-text-tertiary"
-                    }`}
-                  >
-                    {step.num}
-                  </div>
-                  <span
-                    className={`text-xs font-medium ${
-                      i < 4 ? "text-text-primary" : "text-text-tertiary"
-                    }`}
-                  >
-                    {step.label}
-                  </span>
-                  <span className="text-[10px] text-text-tertiary">
-                    {step.desc}
-                  </span>
+              <div
+                key={step.num}
+                className="step-reveal flex flex-col items-center gap-2"
+                style={{ animationDelay: `${200 + i * 100}ms` }}
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-accent-green/20 bg-accent-green/5 text-sm font-mono font-semibold text-accent-green/70 transition-colors">
+                  {step.num}
                 </div>
-                {i < PIPELINE_STEPS.length - 1 && (
-                  <div className="mb-8">
-                    <ArrowIcon />
-                  </div>
-                )}
+                <span className="text-xs font-medium text-text-primary">
+                  {step.label}
+                </span>
+                <span className="text-[10px] text-text-tertiary">
+                  {step.desc}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Mobile: 3x2 grid */}
+        {/* Mobile: 3x2 grid, all steps equal */}
         <div className="grid grid-cols-3 gap-4 md:hidden">
           {PIPELINE_STEPS.map((step, i) => (
             <div
@@ -348,20 +294,10 @@ export default function HomePage() {
               className="step-reveal flex flex-col items-center gap-2"
               style={{ animationDelay: `${200 + i * 100}ms` }}
             >
-              <div
-                className={`flex h-10 w-10 items-center justify-center rounded-full border text-xs font-mono font-semibold ${
-                  i < 4
-                    ? "border-accent-green/40 bg-accent-green/10 text-accent-green"
-                    : "border-border text-text-tertiary"
-                }`}
-              >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent-green/20 bg-accent-green/5 text-xs font-mono font-semibold text-accent-green/70">
                 {step.num}
               </div>
-              <span
-                className={`text-xs font-medium ${
-                  i < 4 ? "text-text-primary" : "text-text-tertiary"
-                }`}
-              >
+              <span className="text-xs font-medium text-text-primary">
                 {step.label}
               </span>
             </div>
@@ -373,18 +309,18 @@ export default function HomePage() {
 
       {/* ─── Recent Grants ─── */}
       <section className="stagger-6">
-        <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-heading text-xl font-semibold">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-heading text-lg font-semibold">
             Recent Activity
           </h2>
           <Link
             to="/grants"
-            className="flex items-center gap-1 text-sm text-text-secondary transition-colors hover:text-text-primary"
+            className="flex items-center gap-1 text-xs text-text-tertiary transition-colors hover:text-text-secondary"
           >
             View All
             <svg
-              width="14"
-              height="14"
+              width="12"
+              height="12"
               viewBox="0 0 16 16"
               fill="none"
               stroke="currentColor"
@@ -398,45 +334,31 @@ export default function HomePage() {
         </div>
 
         {recentGrants.length === 0 && !isLoading && (
-          <div className="card flex items-center justify-center p-12 text-text-tertiary">
+          <div className="card flex items-center justify-center p-10 text-sm text-text-tertiary">
             <p>No grants disbursed yet. The Patron is watching.</p>
           </div>
         )}
 
         {isLoading && (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {[1, 2, 3].map((i) => (
               <div key={i} className="card p-4">
-                <div className="shimmer h-12 rounded" />
+                <div className="shimmer h-10 rounded" />
               </div>
             ))}
           </div>
         )}
 
         {recentGrants.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {recentGrants.map((grant) => (
               <div
                 key={grant.id}
-                className="card flex items-center justify-between p-4 transition-all hover:border-accent-green/20"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, rgba(0,255,136,0) 0%, rgba(0,255,136,0) 100%)",
-                  transition:
-                    "border-color 150ms ease-out, transform 150ms ease-out, box-shadow 150ms ease-out, background-image 300ms ease-out",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundImage =
-                    "linear-gradient(90deg, rgba(0,255,136,0.02) 0%, transparent 100%)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundImage =
-                    "linear-gradient(90deg, rgba(0,255,136,0) 0%, rgba(0,255,136,0) 100%)";
-                }}
+                className="card group flex items-center justify-between p-4 transition-all hover:border-accent-green/15"
               >
-                <div className="flex items-center gap-4">
-                  {/* Green numbered badge */}
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-green/10 text-sm font-semibold text-accent-green">
+                <div className="flex items-center gap-3.5">
+                  {/* Muted index number -- no green circle */}
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-surface-raised text-xs font-mono font-medium text-text-tertiary">
                     {grant.id}
                   </span>
 
@@ -450,16 +372,16 @@ export default function HomePage() {
                       {truncateAddress(grant.recipient)}
                       <ExternalIcon size={10} />
                     </a>
-                    <p className="mt-0.5 text-xs text-text-tertiary">
+                    <p className="mt-0.5 text-[11px] text-text-tertiary">
                       Round {grant.roundId.toString()} &middot;{" "}
                       {timeAgo(Number(grant.timestamp))}
                     </p>
                   </div>
                 </div>
 
-                <span className="font-heading text-lg font-semibold tabular-nums text-accent-green">
+                <span className="font-heading text-base font-semibold tabular-nums text-text-primary">
                   {formatEth(grant.amount)}
-                  <span className="ml-1 text-sm font-normal text-text-secondary">
+                  <span className="ml-1 text-xs font-normal text-text-tertiary">
                     ETH
                   </span>
                 </span>
@@ -477,42 +399,43 @@ export default function HomePage() {
           className="relative overflow-hidden rounded-lg p-px"
           style={{
             background:
-              "linear-gradient(135deg, rgba(0,255,136,0.3), rgba(59,130,246,0.2), rgba(0,255,136,0.1))",
+              "linear-gradient(135deg, rgba(0,255,136,0.15), rgba(59,130,246,0.1), rgba(0,255,136,0.05))",
           }}
         >
-          <div className="rounded-[7px] bg-surface px-6 py-10 text-center sm:px-10">
+          <div className="rounded-[7px] bg-surface px-6 py-8 text-center sm:px-10">
             {/* Decorative icon */}
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-accent-green/20 bg-accent-green/5">
+            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-accent-green/15 bg-accent-green/5">
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-accent-green"
+                className="text-accent-green/70"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <path d="M9 12l2 2 4-4" />
               </svg>
             </div>
 
-            <h3 className="font-heading text-lg font-semibold text-text-primary">
+            <h3 className="font-heading text-base font-semibold text-text-primary">
               Every grant decision is verifiable on-chain
             </h3>
-            <p className="mx-auto mt-2 max-w-md text-sm text-text-secondary">
+            <p className="mx-auto mt-1.5 max-w-md text-xs text-text-secondary leading-relaxed">
               No committees. No gatekeepers. Just an autonomous agent, a
               treasury, and a public ledger.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
+              {/* Primary CTA */}
               <a
                 href={`${BASESCAN_URL}/address/${TREASURY_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg px-4 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
+                className="inline-flex items-center gap-1.5 rounded-full border border-accent-green/25 bg-accent-green/8 px-4 py-1.5 text-xs font-medium text-accent-green transition-all hover:bg-accent-green/15 hover:border-accent-green/40"
               >
                 <svg
                   width="12"
@@ -531,6 +454,7 @@ export default function HomePage() {
                 <ExternalIcon size={10} />
               </a>
 
+              {/* Secondary CTAs */}
               <a
                 href={`${BASESCAN_URL}/address/${PATRON_ADDRESS}`}
                 target="_blank"
