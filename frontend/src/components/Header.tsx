@@ -5,7 +5,7 @@ import { useTreasury } from "../hooks/useTreasury";
 function DiamondIcon() {
   return (
     <img
-      src="/logo.png"
+      src="/the-patron/logo.png"
       alt="The Patron"
       width={28}
       height={28}

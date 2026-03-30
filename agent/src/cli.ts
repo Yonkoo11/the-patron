@@ -2,7 +2,7 @@ import { scanBasescanDeployers } from "./scanner.js";
 import { verifyBuilder } from "./verifier.js";
 import { evaluateBuilder, calculateGrantAmount } from "./evaluator.js";
 import { disburseGrant, startRound, getTreasuryStatus, getWalletBalance, getWalletAddress } from "./funder.js";
-import { postGrantAnnouncement } from "./reporter.js";
+import { postGrantAnnouncement, tweet } from "./reporter.js";
 import { config } from "./config.js";
 
 /**
@@ -29,6 +29,9 @@ async function main() {
     case "round":
       await cmdRound(process.argv[3]);
       break;
+    case "tweet":
+      await cmdTweet(process.argv.slice(3).join(" "));
+      break;
     default:
       console.log("Usage: tsx src/cli.ts <command> [args]");
       console.log("");
@@ -38,6 +41,7 @@ async function main() {
       console.log("  disburse <addr>   - Evaluate and disburse grant to address");
       console.log("  status            - Show treasury and agent status");
       console.log("  round <theme>     - Start a new grant round");
+      console.log("  tweet <text>      - Post a tweet to @ThePatronAgent");
       break;
   }
 }
@@ -147,6 +151,19 @@ async function cmdRound(theme?: string) {
   console.log(`Starting round: "${theme}"...`);
   const txHash = await startRound(theme);
   console.log(`Round started! TX: ${config.basescanExplorer}/tx/${txHash}`);
+}
+
+async function cmdTweet(text?: string) {
+  if (!text) {
+    console.log("Usage: tsx src/cli.ts tweet <text>");
+    return;
+  }
+  const id = await tweet(text);
+  if (id) {
+    console.log(`Tweet posted: https://x.com/i/status/${id}`);
+  } else {
+    console.log("Tweet failed. Check TWITTER_* env vars.");
+  }
 }
 
 main().catch(console.error);

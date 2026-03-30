@@ -135,7 +135,7 @@ function ScrollRevealInit() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/the-patron">
       <ScrollToTop />
       <ScrollRevealInit />
       <MeshBackground />

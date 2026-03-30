@@ -19,3 +19,4 @@ contracts/broadcast/
 video/out/
 frontend/.netlify/
 frontend/tsconfig.tsbuildinfo
+contracts/broadcast/
